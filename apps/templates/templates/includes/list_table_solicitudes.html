@@ -15,6 +15,8 @@
                 <th>Observaciones</th>
             {% endif %}
             <th>Adj.</th>
+            <th>Estado</th>
+            <th>N° de <br> Autorizacion</th>
             <th># Expediente.</th>
         {% endif %}
         {% if group == 2 %}
@@ -148,6 +150,16 @@
                             </td>
                         </tr>
                     </table>
+                </td>
+                <td>
+                    {% include 'includes/state_solicitud_all.html' with state=object.estado  state_name=object.get_estado_display %}
+                </td>
+                <td>
+                    {% if object.get_certificado %}
+                        {{ object.get_certificado.numero_autorizacion }}
+                    {% else %}
+                        "--"
+                    {% endif %}
                 </td>
                 <td>
                     {{ object.numero_expediente|default_if_none:"--" }}
